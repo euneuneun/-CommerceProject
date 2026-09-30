@@ -14,13 +14,8 @@ public class Main {
         products.add(new Product("Ipad Air4", 700000, "2021년 모델", 2));
 
 
-        System.out.println("[ 실시간 커머스 플랫폼 - 전자제품 ] ");
-
-        for(int i = 0; i<products.size();i++)
-        {
-            Product p = products.get(i);
-            System.out.printf("%d. %s | %,10d원 | %s | 재고 %d개%n", i+1, p.getName(), p.getPrice(), p.getDesciption(),p.getStock());
-        }
+        CommerceSystem commerceSystem = new CommerceSystem(products);
+        commerceSystem.start();
 
 
 
