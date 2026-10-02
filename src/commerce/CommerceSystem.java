@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CommerceSystem {
-    private List<Product> products;
+    private final List<Category> categories;
 
-    public CommerceSystem(List<Product> products){
-        this.products = products;
+    public CommerceSystem(List<Category> categories){
+        this.categories = categories;
     }
 
     public void start(){
         Scanner scanner = new Scanner(System.in);
 
         while(true){
-            printProducts();
+            printCategory();
             System.out.print("번호를 입력하세요: ");
 
             try{
@@ -25,12 +25,13 @@ public class CommerceSystem {
                     break;
                 }
 
-                if(input < 1 || input >products.size()){
+                if(input < 1 || input >categories.size()){
                     System.out.println("올바른 번호를 입력해주세요.");
                     continue;
                 }
 
-                Product selected = products.get(input - 1);
+                printProducts(input);
+                Category selected = categories.get(input - 1);
                 System.out.printf("%s 상품을 선택했습니다. %n", selected.getName());
 
             }catch (NumberFormatException e){
@@ -42,12 +43,24 @@ public class CommerceSystem {
         scanner.close();
     }
 
-    private void printProducts(){
-        System.out.println("[ 실시간 커머스 플랫폼 - 전자제품 ]");
-        for(int i = 0; i<products.size(); i++){
-            Product p = products.get(i);
-            System.out.printf("%d. %-12s | %,10d원 | %s%n", i+1,p.getName(), p.getPrice(), p.getDesciption());
+    private void printCategory(){
+        System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
+        for(int j =0; j<categories.size();j++){
+            Category p = categories.get(j);
+            System.out.printf("%d. %s %n",j+1,p.getName());
         }
+    }
+
+    private void printProducts(int input){
+        Category category = categories.get(input-1);
+        List<Product> products = category.getProducts();
+
+        for (int k = 0; k<products.size();k++){
+            Product p = products.get(k);
+            System.out.printf("%d. %-12s | %,10d원 | %s%n",k+1 ,p.getName(), p.getPrice(), p.getDesciption());
+        }
+
+
         System.out.println("0. 종료         | 프로그램 종료");
     }
 
