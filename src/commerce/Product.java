@@ -19,4 +19,14 @@ public class Product {
     public String getDesciption() { return desciption; }
     public int getStock() { return stock; }
 
+    public void setPrice(int price) {
+        if (price < 0) throw new IllegalArgumentException("가격은 0 이상이어야 합니다.");
+        this.price = price;
+    }
+
+    public void setStock(int stock) {
+        if (stock < 0) throw new IllegalArgumentException("재고는 0 이상이어야 합니다.");
+        this.stock = stock;
+    }
+
 }

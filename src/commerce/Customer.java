@@ -15,5 +15,8 @@ public class Customer {
     public String getEmail(){ return email; }
     public String getGrade(){ return grade; }
 
+    public void setEmail(String email){ this.email = email; }
+    public void setGrade(String grade){ this.grade = grade; }
+
 
 }
