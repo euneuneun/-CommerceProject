@@ -1,5 +1,6 @@
 package commerce;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Category {
@@ -17,6 +18,6 @@ public class Category {
     }
 
     public List<Product> getProducts(){
-        return products;
+        return Collections.unmodifiableList(products);
     }
 }
