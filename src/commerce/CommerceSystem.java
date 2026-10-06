@@ -71,7 +71,7 @@ public class CommerceSystem {
 
             Product p = products.get(input - 1);
             System.out.printf("선택한 상품: %s | %,d원 | %s | 재고: %d개%n",
-                    p.getName(), p.getPrice(), p.getDesciption(), p.getStock());
+                    p.getName(), p.getPrice(), p.getDescription(), p.getStock());
 
         }catch (NumberFormatException e){
             System.out.println("숫자만 입력해주세요.");
@@ -81,7 +81,7 @@ public class CommerceSystem {
     private void printProducts(List<Product> products){
         for (int k = 0; k<products.size();k++){
             Product p = products.get(k);
-            System.out.printf("%d. %-12s | %,10d원 | %s%n",k+1 ,p.getName(), p.getPrice(), p.getDesciption());
+            System.out.printf("%d. %-12s | %,10d원 | %s%n",k+1 ,p.getName(), p.getPrice(), p.getDescription());
         }
 
         System.out.println("0. 뒤로가기     | 메인으로 돌아가기");
