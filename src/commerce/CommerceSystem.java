@@ -30,9 +30,9 @@ public class CommerceSystem {
                     continue;
                 }
 
-                printProducts(input);
                 Category selected = categories.get(input - 1);
-                System.out.printf("%s 상품을 선택했습니다. %n", selected.getName());
+                System.out.printf("%s 카테고리를 선택했습니다. %n", selected.getName());
+                selectProduct(scanner, selected);
 
             }catch (NumberFormatException e){
                 System.out.println("숫자만 입력해주세요.");
@@ -49,19 +49,42 @@ public class CommerceSystem {
             Category p = categories.get(j);
             System.out.printf("%d. %s %n",j+1,p.getName());
         }
+        System.out.println("0. 종료         | 프로그램 종료");
     }
 
-    private void printProducts(int input){
-        Category category = categories.get(input-1);
+    private void selectProduct(Scanner scanner, Category category){
         List<Product> products = category.getProducts();
+        printProducts(products);
+        System.out.print("번호를 입력하세요: ");
 
+        try{
+            int input = Integer.parseInt(scanner.nextLine());
+
+            if (input == 0){
+                return;
+            }
+
+            if(input < 1 || input > products.size()){
+                System.out.println("올바른 번호를 입력해주세요.");
+                return;
+            }
+
+            Product p = products.get(input - 1);
+            System.out.printf("선택한 상품: %s | %,d원 | %s | 재고: %d개%n",
+                    p.getName(), p.getPrice(), p.getDesciption(), p.getStock());
+
+        }catch (NumberFormatException e){
+            System.out.println("숫자만 입력해주세요.");
+        }
+    }
+
+    private void printProducts(List<Product> products){
         for (int k = 0; k<products.size();k++){
             Product p = products.get(k);
             System.out.printf("%d. %-12s | %,10d원 | %s%n",k+1 ,p.getName(), p.getPrice(), p.getDesciption());
         }
 
-
-        System.out.println("0. 종료         | 프로그램 종료");
+        System.out.println("0. 뒤로가기     | 메인으로 돌아가기");
     }
 
 
