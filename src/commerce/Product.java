@@ -9,6 +9,8 @@ public class Product {
     // 생성자: 객체를 만들 때 값을 채워넣는 통로
     public Product(String name, int price, String description, int stock){
         this.name = name;
+        validatePrice(price);
+        validateStock(stock);
         this.price = price;
         this.description = description;
         this.stock = stock;
@@ -20,13 +22,21 @@ public class Product {
     public int getStock() { return stock; }
 
     public void setPrice(int price) {
-        if (price < 0) throw new IllegalArgumentException("가격은 0 이상이어야 합니다.");
+        validatePrice(price);
         this.price = price;
     }
 
     public void setStock(int stock) {
-        if (stock < 0) throw new IllegalArgumentException("재고는 0 이상이어야 합니다.");
+        validateStock(stock);
         this.stock = stock;
+    }
+
+    private static void validatePrice(int price) {
+        if (price < 0) throw new IllegalArgumentException("가격은 0 이상이어야 합니다.");
+    }
+
+    private static void validateStock(int stock) {
+        if (stock < 0) throw new IllegalArgumentException("재고는 0 이상이어야 합니다.");
     }
 
 }
