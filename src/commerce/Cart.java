@@ -46,4 +46,17 @@ public class Cart {
     public boolean remove(Product product){
         return items.removeIf(item -> item.getProduct() == product);
     }
+
+    // 상품명으로 장바구니에서 제거한다. 제거된 상품이 있으면 true
+    public boolean removeByName(String productName){
+        // stream.filter로 해당 이름이 아닌 상품만 남긴다
+        List<CartItem> remaining = items.stream()
+                .filter(item -> !item.getProduct().getName().equals(productName))
+                .toList();
+
+        boolean removed = remaining.size() != items.size();
+        items.clear();
+        items.addAll(remaining);
+        return removed;
+    }
 }

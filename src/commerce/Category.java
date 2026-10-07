@@ -3,6 +3,7 @@ package commerce;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Category {
 
@@ -21,6 +22,13 @@ public class Category {
 
     public List<Product> getProducts(){
         return Collections.unmodifiableList(products);
+    }
+
+    // 조건(람다)에 맞는 상품만 골라서 반환한다
+    public List<Product> filterProducts(Predicate<Product> condition){
+        return products.stream()
+                .filter(condition)
+                .toList();
     }
 
     // 이 카테고리 안에 같은 이름의 상품이 있는지 확인한다
