@@ -75,9 +75,9 @@ public class CommerceSystem {
     private void printCategory(){
         System.out.println();
         System.out.println("[ 실시간 커머스 플랫폼 메인 ]");
-        for(int j =0; j<categories.size();j++){
-            Category p = categories.get(j);
-            System.out.printf("%d. %s %n",j+1,p.getName());
+        for (int i = 0; i < categories.size(); i++){
+            Category category = categories.get(i);
+            System.out.printf("%d. %s%n", i + 1, category.getName());
         }
         System.out.println("0. 종료         | 프로그램 종료");
         System.out.printf("%d. 관리자 모드%n", ADMIN_MENU);
