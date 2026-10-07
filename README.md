@@ -22,7 +22,7 @@
 **터미널**
 
 ```bash
-javac -encoding UTF-8 -d out src/commerce/*.java
+javac -encoding UTF-8 -d out $(find src -name "*.java")
 java -cp out commerce.Main
 ```
 
@@ -62,16 +62,23 @@ java -cp out commerce.Main
 
 ```
 src/commerce
-├── Main.java            # 프로그램 시작점, 초기 상품·카테고리 데이터 생성
-├── CommerceSystem.java  # 고객 흐름 제어 (메뉴 입력, 상품 조회, 장바구니, 주문)
-├── AdminMode.java       # 관리자 흐름 제어 (인증, 상품 추가·수정·삭제, 현황)
-├── Category.java        # 카테고리 이름과 상품 목록 관리 (추가·삭제·검색·필터링)
-├── Product.java         # 상품 정보와 재고 관리 (가격·재고 검증, 재고 차감)
-├── Cart.java            # 장바구니 항목 관리 (추가, 제거, 수량·총액 계산)
-├── CartItem.java        # 장바구니에 담긴 상품 한 줄 (상품 + 수량)
-├── Customer.java        # 고객 정보 (이름, 이메일, 등급)
-└── CustomerGrade.java   # 고객 등급별 할인율 (Enum)
+├── Main.java                # 프로그램 시작점, 초기 상품·카테고리 데이터 생성
+├── system/                  # 프로그램 흐름 제어
+│   ├── CommerceSystem.java  # 고객 흐름 (메뉴 입력, 상품 조회, 장바구니, 주문)
+│   └── AdminMode.java       # 관리자 흐름 (인증, 상품 추가·수정·삭제, 현황)
+├── product/                 # 상품 도메인
+│   ├── Category.java        # 카테고리 이름과 상품 목록 관리 (추가·삭제·검색·필터링)
+│   └── Product.java         # 상품 정보와 재고 관리 (가격·재고 검증, 재고 차감)
+├── cart/                    # 장바구니 도메인
+│   ├── Cart.java            # 장바구니 항목 관리 (추가, 제거, 총액 계산)
+│   └── CartItem.java        # 장바구니에 담긴 상품 한 줄 (상품 + 수량)
+└── customer/                # 고객 도메인
+    ├── Customer.java        # 고객 정보 (이름, 이메일, 등급)
+    └── CustomerGrade.java   # 고객 등급별 할인율 (Enum)
 ```
+
+패키지는 도메인(상품 / 장바구니 / 고객)과 흐름 제어(system)를 기준으로 나눴습니다.
+`system`이 각 도메인 객체를 사용하고, 도메인끼리는 필요한 만큼만 참조합니다(예: `CartItem`이 `Product`를 참조).
 
 | 클래스 | 책임 |
 | --- | --- |
