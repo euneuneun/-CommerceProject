@@ -39,4 +39,14 @@ public class Product {
         if (stock < 0) throw new IllegalArgumentException("재고는 0 이상이어야 합니다.");
     }
 
+    public boolean hasEnoughStock(int quantity){
+        return stock>=quantity;
+    }
+
+    public void decreaseStock(int quantity){
+        if(stock<quantity)
+            throw new IllegalArgumentException("재고가 부족합니다: "+name);
+        this.stock -= quantity;
+    }
+
 }
