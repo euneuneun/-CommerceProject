@@ -31,6 +31,10 @@ public class Product {
         this.stock = stock;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private static void validatePrice(int price) {
         if (price < 0) throw new IllegalArgumentException("가격은 0 이상이어야 합니다.");
     }
@@ -49,4 +53,9 @@ public class Product {
         this.stock -= quantity;
     }
 
+    // 상품 정보를 "이름 | 가격 | 설명" 형식으로 표현한다
+    @Override
+    public String toString() {
+        return String.format("%s | %,d원 | %s", name, price, description);
+    }
 }

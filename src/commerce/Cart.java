@@ -41,4 +41,9 @@ public class Cart {
     public List<CartItem> getItems() { return Collections.unmodifiableList(items);}
 
     public void clear(){items.clear();}
+
+    // 특정 상품을 장바구니에서 제거한다 (관리자가 상품을 삭제했을 때 사용)
+    public boolean remove(Product product){
+        return items.removeIf(item -> item.getProduct() == product);
+    }
 }

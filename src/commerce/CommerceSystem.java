@@ -6,12 +6,15 @@ import java.util.Scanner;
 public class CommerceSystem {
     private static final int CART_MENU = 4;    // 장바구니 확인
     private static final int CANCEL_MENU = 5;  // 주문 취소
+    private static final int ADMIN_MENU = 6;   // 관리자 모드
 
     private final List<Category> categories;
     private final Cart cart = new Cart();
+    private final AdminMode adminMode;
 
     public CommerceSystem(List<Category> categories){
         this.categories = categories;
+        this.adminMode = new AdminMode(categories, cart);
     }
 
     public void start(){
@@ -43,6 +46,11 @@ public class CommerceSystem {
                     continue;
                 }
 
+                if (input == ADMIN_MENU){
+                    adminMode.start(scanner);
+                    continue;
+                }
+
                 if(input < 1 || input >categories.size()){
                     System.out.println("올바른 번호를 입력해주세요.");
                     continue;
@@ -70,6 +78,7 @@ public class CommerceSystem {
             System.out.printf("%d. %s %n",j+1,p.getName());
         }
         System.out.println("0. 종료         | 프로그램 종료");
+        System.out.printf("%d. 관리자 모드%n", ADMIN_MENU);
 
         // 장바구니에 상품이 있을 때만 주문 관리 메뉴를 출력한다
         if (!cart.isEmpty()){
@@ -100,7 +109,7 @@ public class CommerceSystem {
             }
 
             Product p = products.get(input - 1);
-            System.out.printf("선택한 상품: %s | 재고: %d개%n", formatProduct(p), p.getStock());
+            System.out.printf("선택한 상품: %s | 재고: %d개%n", p, p.getStock());
 
             askAddToCart(scanner, p);
 
@@ -122,7 +131,7 @@ public class CommerceSystem {
     // 상품을 장바구니에 담을지 묻고, 재고를 확인한 뒤 담는다
     private void askAddToCart(Scanner scanner, Product p){
         System.out.println();
-        System.out.printf("\"%s\"%n", formatProduct(p));
+        System.out.printf("\"%s\"%n", p);
         System.out.println("위 상품을 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인        2. 취소");
         System.out.print("번호를 입력하세요: ");
@@ -159,7 +168,7 @@ public class CommerceSystem {
         System.out.println();
         System.out.println("[ 장바구니 내역 ]");
         for (CartItem item : cart.getItems()){
-            System.out.printf("%s | 수량: %d개%n", formatProduct(item.getProduct()), item.getQuantity());
+            System.out.printf("%s | 수량: %d개%n", item.getProduct(), item.getQuantity());
         }
         System.out.println();
         System.out.println("[ 총 주문 금액 ]");
@@ -209,10 +218,5 @@ public class CommerceSystem {
     private void cancelOrder(){
         cart.clear();
         System.out.println("진행중인 주문을 취소했습니다. 장바구니를 비웠습니다.");
-    }
-
-    // 상품 정보를 "이름 | 가격 | 설명" 형식의 문자열로 만든다
-    private String formatProduct(Product p){
-        return String.format("%s | %,d원 | %s", p.getName(), p.getPrice(), p.getDescription());
     }
 }
