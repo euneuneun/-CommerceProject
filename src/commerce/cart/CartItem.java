@@ -1,4 +1,6 @@
-package commerce;
+package commerce.cart;
+
+import commerce.product.Product;
 
 public class CartItem {
     private final Product product;

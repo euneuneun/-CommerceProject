@@ -1,4 +1,10 @@
-package commerce;
+package commerce.system;
+
+import commerce.cart.Cart;
+import commerce.cart.CartItem;
+import commerce.customer.CustomerGrade;
+import commerce.product.Category;
+import commerce.product.Product;
 
 import java.util.List;
 import java.util.Scanner;

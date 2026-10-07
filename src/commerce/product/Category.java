@@ -1,4 +1,4 @@
-package commerce;
+package commerce.product;
 
 import java.util.ArrayList;
 import java.util.Collections;

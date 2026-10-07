@@ -1,4 +1,4 @@
-package commerce;
+package commerce.customer;
 
 // 고객 등급과 등급별 할인율을 관리한다
 public enum CustomerGrade {

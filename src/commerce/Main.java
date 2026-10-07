@@ -1,5 +1,9 @@
 package commerce;
 
+import commerce.product.Category;
+import commerce.product.Product;
+import commerce.system.CommerceSystem;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

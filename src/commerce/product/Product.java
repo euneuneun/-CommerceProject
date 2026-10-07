@@ -1,4 +1,4 @@
-package commerce;
+package commerce.product;
 
 public class Product {
     private String name;    // 상품명

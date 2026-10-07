@@ -1,4 +1,4 @@
-package commerce;
+package commerce.customer;
 
 public class Customer {
 
