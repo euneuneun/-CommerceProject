@@ -9,7 +9,8 @@ public class Cart {
 
     public void add(Product product, int quantity){
         for (CartItem item:items){
-            if(item.getProduct().getName().equals(product.getName())){
+            // 이름이 아니라 객체로 비교한다 (다른 카테고리에 같은 이름의 상품이 있을 수 있음)
+            if(item.getProduct() == product){
                 item.addQuantity(quantity);
                 return;
             }
@@ -19,13 +20,7 @@ public class Cart {
 
     public int getQuantityOf(Product product){
         return items.stream()
-                .filter(item -> item.getProduct().getName().equals(product.getName()))
-                .mapToInt(CartItem::getQuantity)
-                .sum();
-    }
-
-    public int getTotalQuantity(){
-        return items.stream()
+                .filter(item -> item.getProduct() == product)
                 .mapToInt(CartItem::getQuantity)
                 .sum();
     }
